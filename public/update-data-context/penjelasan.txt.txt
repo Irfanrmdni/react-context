@@ -1,0 +1,6 @@
+membuat component setting.js untuk update data name user
+
+kita harus menambahkan state setUser ke dalam value AppContext nya. agar bisa meng update data user
+kemudian kita gunakan context setUser yang telah ditambahkan dan merge terlebih dahulu dengan cara 
+...context.user agar avatar nya tetap ada ketika name nya berubah
+lalu kita ubah name di data user nya dengan e.target.value untuk update data user name

@@ -1,0 +1,20 @@
+react context adalah untuk melakukan passing data ke component tanpa lewat props
+untuk menggunakan context harus menggunakan API context
+react context diperuntukan untuk dependency injection.
+
+cara untuk mengatasi agar tidak lagi menggunakan props adalah dengan menggunakan react context
+untuk caranya cukup membuat file context nya 
+export const AppContext = createContext({
+    empty: true,
+});
+
+isi dari context {empty: value,} adalah ketika si component nya tidak dibungkus oleh si context provider nya
+maka dia akan meng-callback atau memberi default value: empty: true,
+
+dan buat value untuk tangkap data nya
+lalu untuk menggunakan atau passing ke component nya cukup panggil nama context yang telah dibuat
+dan tambahkan hanya ke component yang dibutuhkan saja
+
+
+
+

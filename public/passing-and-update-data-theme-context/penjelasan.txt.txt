@@ -1,0 +1,5 @@
+membuat state theme untuk menampilkan theme dan mengupdate theme
+
+caranya kita hanya perlu menambahkan theme dan setTheme di value appContextValue
+kemudian kita tampilkan theme nya di component DisplayTheme
+kemudian kita update theme nya di ToggleTheme dengan cara menggunakan setTheme

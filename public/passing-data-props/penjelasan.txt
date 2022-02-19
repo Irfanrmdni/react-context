@@ -1,0 +1,7 @@
+cara passing data atau mengakses data ke dalam beberapa component
+
+di react ketika kita punya data kemudian ada satu component yang mau pakai data itu
+kita harus passing data itu lewat props. ke component yang ingin menggunakan nya
+
+props drilling adalah ketika mengakses data kedalam component dari satu
+component ke component lainnya secara turun temurun melalui props

@@ -1,0 +1,11 @@
+useReducer umumnya kita simpan untuk beberapa jenis data untuk state dan setState nya.
+dengan menggunakan object
+
+untuk melakukan setState nya dilakukan di dalam function useReducer
+
+consumer / subscribe adalah component yang mengambil/menerima data ke context
+
+ketika menggunakan useReducer dia akan mengganti state sebelumnya dengan yg baru bukan dicek satu-persatu mana aja yang berubah
+ketika 1 state berubah maka semua component ikut berubah/dirender. bukan hanya component 1 doang
+
+cara mengatasi nya dengan split atau pisah ke context yg lain

@@ -1,0 +1,156 @@
+
+library untuk state management : redux , recoil
+
+membuat state menggunakan useReducer alternatif lain untuk membuat state
+const [count,setCount] = useReducer(nama function, inisial state)
+
+untuk setCount nya menggunakan function reducer yang mereturn value 
+memiliki 2 parameter (state,action)
+state itu seperti count dan action itu seperti argumen yang ada di setCount
+
+const [count,setCount] = useReducer(reducer, 0)
+
+
+
+  const [user, setUser] = useState({});
+  const [theme, setTheme] = useState('Dark');
+
+  useEffect(() => {
+    // ? data user
+    const user = {
+      name: 'irfan ramdani',
+      avatar: 'https://randomuser.me/api/portraits/men/72.jpg'
+    }
+
+    setUser(user);
+  }, []);
+
+  const appContextValue = {
+    user: user,
+    setUser: setUser,
+    theme: theme,
+    setTheme: setTheme,
+  };
+
+  return (
+    <div className="App">
+      {/* tanpa dibungkus dengan AppContext provider. akan error */}
+      {/* <Navbar /> */}
+
+      <AppContext.Provider value={appContextValue}>
+        <Navbar />
+        <hr />
+        <Setting />
+        <hr />
+        <DisplayTheme />
+        <hr />
+        <ToggleTheme />
+      </AppContext.Provider>
+    </div>
+  );
+
+  file context :
+  export const AppContext = createContext(
+    {
+        // ? ketika tidak menggunakan/dibungkus dengan provider maka akan menghasilkan default value yaitu empty true 
+        empty: true,
+    }
+);
+
+==============================
+
+import { createContext, useContext, useEffect, useState } from "react";
+
+export const AppContext = createContext({});
+
+export function useAppContext() {
+    return useContext(AppContext);
+}
+
+export function AppProvider({ children }) {
+    const [user, setUser] = useState({});
+    const [theme, setTheme] = useState('Dark');
+
+    useEffect(() => {
+        // ? data user
+        const user = {
+            name: 'irfan ramdani',
+            avatar: 'https://randomuser.me/api/portraits/men/72.jpg'
+        }
+
+        setUser(user);
+    }, []);
+
+    const appContextValue = {
+        user: user,
+        setUser: setUser,
+        theme: theme,
+        setTheme: setTheme,
+    };
+
+    return (
+        <AppContext.Provider value={appContextValue}>
+            {children}
+        </AppContext.Provider>
+    );
+}
+
+==============================
+
+import { useAppContext } from "../context/app-context";
+export default function DisplayTheme() {
+    const context = useAppContext();
+
+    return (
+        <div>
+            {context.theme}
+        </div>
+    );
+
+}
+
+==============================
+
+import { useAppContext } from "../context/app-context";
+
+export default function NavbarUserText() {
+    const context = useAppContext();
+
+    return (
+        <>
+            {/* menampilkan data nama */}
+            <span>Hi. {context.user.name}</span>
+        </>
+    );
+}
+
+==============================
+
+import { useReducer } from "react";
+
+function reducer(state, action) {
+    switch (action.type) {
+        case 'increment':
+            return state + action.payload;
+        case 'decrement':
+            return state - action.payload;
+        default:
+            throw new Error();
+    }
+}
+
+export default function Reducer() {
+    // ? state biasa
+    // let [count, setCount] = useState(0);
+    // ? state reducer
+    let [count, setCount] = useReducer(reducer, 0);
+
+    return (
+        <>
+            <button onClick={() => setCount({ type: 'decrement', payload: 2 })}>-</button>
+            <span>{count}</span>
+            {/* <button onClick={() => setCount(count + 1)}>+</button> */}
+            <button onClick={() => setCount({ type: 'increment', payload: 2 })}>+</button>
+        </>
+    );
+}
